@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<div class="slide" style="padding:40px 64px;">
+  <div class="furn-top">
+    <span class="mt-mark" style="letter-spacing:0"><i></i></span>
+    <span>业务结构 / STRUCTURE</span>
+  </div>
+  <hr class="rule" style="position:absolute;left:64px;right:64px;top:78px;">
+
+  <div style="position:absolute;left:64px;top:110px;display:flex;align-items:center;">
+    <h2 class="headline hl-l">收入<span class="hl-mark">结构</span></h2>
+    <span class="chev sm" style="margin-left:20px;"><span></span><span></span><span></span></span>
+  </div>
+
+  <!-- 左：环形图 -->
+  <div style="position:absolute;left:64px;top:270px;width:340px;">
+    <svg viewBox="0 0 300 300" width="300">
+      <g transform="rotate(-90 150 150)" fill="none" stroke-width="46">
+        <circle cx="150" cy="150" r="90" class="s-primary" stroke-dasharray="254.5 311" stroke-dashoffset="0"/>
+        <circle cx="150" cy="150" r="90" class="s-ink" stroke-dasharray="169.6 395.9" stroke-dashoffset="-254.5"/>
+        <circle cx="150" cy="150" r="90" class="s-c3" stroke-dasharray="101.8 463.7" stroke-dashoffset="-424.1"/>
+        <circle cx="150" cy="150" r="90" class="s-c4" stroke-dasharray="39.6 525.9" stroke-dashoffset="-525.9"/>
+      </g>
+      <text x="150" y="142" font-family="Archivo, sans-serif" font-weight="900" font-size="40" class="f-ink" text-anchor="middle">GMV</text>
+      <text x="150" y="170" font-family="'Noto Sans SC', sans-serif" font-weight="700" font-size="16" class="f-gray" text-anchor="middle">收入结构</text>
+    </svg>
+    <!-- 图例 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-top:20px;font-size:15px;">
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;background:var(--brand-primary);flex:none;"></span>到店 <b style="margin-left:auto;font-family:var(--font-display);">45%</b></div>
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;background:var(--brand-ink);flex:none;"></span>外卖 <b style="margin-left:auto;font-family:var(--font-display);">30%</b></div>
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;background:var(--brand-chart-3);flex:none;"></span>即时零售 <b style="margin-left:auto;font-family:var(--font-display);">18%</b></div>
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;background:var(--brand-chart-4);flex:none;"></span>其他 <b style="margin-left:auto;font-family:var(--font-display);">7%</b></div>
+    </div>
+  </div>
+
+  <!-- 右：横向排名条 -->
+  <div style="position:absolute;left:520px;right:64px;top:280px;">
+    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:20px;">品类 GMV 排名 · 指数</div>
+
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-bottom:6px;"><span>餐饮外卖</span><span style="font-family:var(--font-display);">100</span></div>
+        <div style="height:20px;background:var(--brand-line);"><div style="width:100%;height:100%;background:var(--brand-ink);"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-bottom:6px;"><span>到店综合</span><span style="font-family:var(--font-display);">72</span></div>
+        <div style="height:20px;background:var(--brand-line);"><div style="width:72%;height:100%;background:var(--brand-primary);"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-bottom:6px;"><span>酒店旅行</span><span style="font-family:var(--font-display);">58</span></div>
+        <div style="height:20px;background:var(--brand-line);"><div style="width:58%;height:100%;background:var(--brand-primary);"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-bottom:6px;"><span>医药健康</span><span style="font-family:var(--font-display);">34</span></div>
+        <div style="height:20px;background:var(--brand-line);"><div style="width:34%;height:100%;background:var(--brand-primary);"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-bottom:6px;"><span>生鲜零售</span><span style="font-family:var(--font-display);">26</span></div>
+        <div style="height:20px;background:var(--brand-line);"><div style="width:26%;height:100%;background:var(--brand-primary);"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="furn-bot"><span>数据来源 · 年报（示意）</span><span>14 / 17</span></div>
+</div>
+</body></html>

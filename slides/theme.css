@@ -1,0 +1,39 @@
+/* ============================================================
+   品牌皮肤 · THEME  ——  换公司只改这一个文件
+   ------------------------------------------------------------
+   把主色、墨色、页底、图表色、字体、logo 文案换成贵司 VI，
+   整册 17 页 + 图表 + 星芒 + 角标细节会自动换皮。
+   当前皮肤：美团 · 黄黑编辑风
+   ============================================================ */
+
+/* —— 字体（VI 的一部分，可替换 Google Fonts 链接）—— */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;0,900;1,800&family=Noto+Sans+SC:wght@200;300;400;500;700;900&family=Caveat:wght@700&display=swap');
+
+:root {
+  /* —— 主色系（必改）—— */
+  --brand-primary:      #FFD100;   /* 主品牌色（美团黄 / B站粉 / …）*/
+  --brand-primary-deep: #FFC300;   /* 深主色：描边 / 压边 */
+  --brand-primary-soft: #FFF3C4;   /* 浅主色：弱高亮 */
+  --brand-ink:          #141414;   /* 墨色：标题 / 大色块 / 反白底 */
+  --brand-ink-2:        #2A2A28;   /* 次级墨：正文 */
+  --brand-bg:           #FBF9F1;   /* 页底（暖白）*/
+  --brand-white:        #FFFFFF;
+
+  /* —— 中性灰阶（一般不改）—— */
+  --brand-gray:   #8C8B84;   /* 灰注释 */
+  --brand-gray-2: #B9B7AD;
+  --brand-line:   #E6E3D8;   /* 细分割线 / 图表网格 */
+
+  /* —— 图表辅助色 —— */
+  --brand-chart-3: #E0A800;  /* 主色的深调 */
+  --brand-chart-4: #C9C6BC;  /* 中性占位 */
+
+  /* —— 字体族 —— */
+  --font-display: 'Archivo', 'Noto Sans SC', system-ui, sans-serif; /* 西文巨字 */
+  --font-cjk:     'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+  --font-script:  'Caveat', cursive;  /* 手写体点缀（英文 slogan）*/
+
+  /* —— 品牌文本 —— */
+  --brand-logo-cn: "美团";      /* 徽标里的方块字 */
+  --brand-logo-en: "MEITUAN";   /* 徽标英文名 */
+}

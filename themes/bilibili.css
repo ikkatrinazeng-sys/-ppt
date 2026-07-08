@@ -1,0 +1,29 @@
+/* ============================================================
+   品牌皮肤 · THEME  —— B站（示例皮肤）
+   用法：把本文件内容覆盖到 slides/theme.css 即整册换成 B站粉
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;0,900;1,800&family=Noto+Sans+SC:wght@200;300;400;500;700;900&family=Caveat:wght@700&display=swap');
+
+:root {
+  --brand-primary:      #FB7299;   /* B站粉 */
+  --brand-primary-deep: #E85A85;
+  --brand-primary-soft: #FFE0EB;
+  --brand-ink:          #18191C;   /* B站深灰 */
+  --brand-ink-2:        #2F3238;
+  --brand-bg:           #FFF7FA;   /* 极浅粉白 */
+  --brand-white:        #FFFFFF;
+
+  --brand-gray:   #9499A0;
+  --brand-gray-2: #C9CDD4;
+  --brand-line:   #F0DCE4;
+
+  --brand-chart-3: #FF9BB3;
+  --brand-chart-4: #D8D8D8;
+
+  --font-display: 'Archivo', 'Noto Sans SC', system-ui, sans-serif;
+  --font-cjk:     'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+  --font-script:  'Caveat', cursive;
+
+  --brand-logo-cn: "B站";
+  --brand-logo-en: "bilibili";
+}

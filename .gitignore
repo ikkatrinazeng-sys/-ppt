@@ -1,0 +1,8 @@
+# 导出产物（可由 scripts 重新生成）
+out/
+standalone/
+
+# 系统 / 缓存
+.DS_Store
+__pycache__/
+*.pyc

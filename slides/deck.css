@@ -1,0 +1,242 @@
+/* ============================================================
+   DECK 引擎 · 版式/组件（勿改品牌，改皮肤请去 theme.css）
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* 单页文件：锁死 16:9 画布，导出时精确 1280x720（.deck-index 页面会覆盖） */
+html, body { width: 1280px; height: 720px; overflow: hidden; }
+body { background: #d9d9d9; font-family: var(--font-cjk); -webkit-font-smoothing: antialiased; }
+
+/* —— 幻灯片画布 16:9 —— */
+.slide {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  background: var(--brand-bg);
+  color: var(--brand-ink);
+  --mark: color-mix(in srgb, var(--brand-ink) 62%, transparent);   /* 细节标记色，跟随主题墨色 */
+}
+.slide-dark { --mark: color-mix(in srgb, var(--brand-bg) 50%, transparent); }  /* 深底页跟随主题页底色 */
+
+/* —— SVG 上色工具类（星芒/图表引用主题色，而非硬编码）—— */
+.f-primary { fill: var(--brand-primary); }
+.f-ink     { fill: var(--brand-ink); }
+.f-gray    { fill: var(--brand-gray); }
+.f-c3      { fill: var(--brand-chart-3); }
+.f-c4      { fill: var(--brand-chart-4); }
+.s-primary { stroke: var(--brand-primary); }
+.s-ink     { stroke: var(--brand-ink); }
+.s-line    { stroke: var(--brand-line); }
+.s-c3      { stroke: var(--brand-chart-3); }
+.s-c4      { stroke: var(--brand-chart-4); }
+
+/* —— 细节家具：四角定位标记（印刷 crop mark 感）—— */
+.slide::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 4;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)), linear-gradient(var(--mark), var(--mark));
+  background-size:
+    22px 1.5px, 1.5px 22px,  22px 1.5px, 1.5px 22px,
+    22px 1.5px, 1.5px 22px,  22px 1.5px, 1.5px 22px;
+  background-position:
+    30px 30px, 30px 30px,
+    right 30px top 30px, right 30px top 30px,
+    30px bottom 30px, 30px bottom 30px,
+    right 30px bottom 30px, right 30px bottom 30px;
+}
+
+/* —— 页眉页脚：编辑感版面家具 —— */
+.furn-top, .furn-bot {
+  position: absolute; left: 64px; right: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--brand-gray);
+}
+.furn-top { top: 40px; }
+.furn-bot { bottom: 40px; }
+.furn-top::after, .furn-bot::before { }
+
+.rule { height: 2px; background: var(--brand-ink); border: 0; }
+.rule-hair { height: 1px; background: var(--brand-line); border: 0; }
+/* 分隔线两端 I-beam 端帽（细节） */
+.rule::before, .rule::after {
+  content: ''; position: absolute; top: -4px; width: 2px; height: 10px; background: var(--mark);
+}
+.rule::before { left: 0; }
+.rule::after  { right: 0; }
+
+/* —— logo 徽标（方块字 + 英文名，文字取自 theme.css）—— */
+.mt-mark {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-cjk); font-weight: 900; letter-spacing: 0;
+  text-transform: none; color: var(--brand-ink); font-size: 17px;
+}
+.mt-mark::after { content: var(--brand-logo-en); font-family: var(--font-display); font-weight: 900; }
+.mt-mark i {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--brand-primary);
+  display: grid; place-items: center;
+  font-style: normal; font-weight: 900; font-size: 13px; color: var(--brand-ink);
+  line-height: 1;
+}
+.mt-mark i::before { content: var(--brand-logo-cn); }
+
+/* —— 标签：小型大写 —— */
+.kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--brand-ink);
+}
+.kicker .cn { font-family: var(--font-cjk); letter-spacing: .1em; }
+.kicker::before {
+  content: ''; width: 26px; height: 4px; background: var(--brand-primary); flex: none;
+}
+/* 标签尾部短刻度（细节） */
+.kicker::after {
+  content: ''; width: 14px; height: 2px; background: var(--mark); flex: none;
+  margin-left: 2px; opacity: .7;
+}
+
+/* —— 巨型标题 —— */
+.headline {
+  font-family: var(--font-cjk); font-weight: 900;
+  line-height: 1.12; letter-spacing: -.01em;
+}
+.hl-xxl { font-size: 132px; }
+.hl-xl  { font-size: 104px; }
+.hl-l   { font-size: 74px; }
+
+/* 黄色高亮块（关键词底衬） */
+.hl-mark {
+  background: var(--brand-primary);
+  padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+.ink-block { background: var(--brand-ink); color: var(--brand-bg); padding: 0 .1em; }
+
+/* 手写点缀 */
+.script {
+  font-family: var(--font-script); font-weight: 700;
+  color: var(--brand-ink); line-height: .9;
+}
+
+/* —— 巨型编号 —— */
+.bignum {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 300px; line-height: .8; letter-spacing: -.03em;
+}
+
+/* —— 装饰：四角星芒 —— */
+.spark { display: inline-block; }
+
+/* —— 卡片（编辑风：细线 + 直角 + 编号） —— */
+.ed-card {
+  background: var(--brand-white); border: 2px solid var(--brand-ink);
+  padding: 26px 24px; display: flex; flex-direction: column; gap: 12px;
+}
+.ed-card .idx {
+  font-family: var(--font-display); font-weight: 900; font-size: 15px;
+  letter-spacing: .1em;
+}
+.ed-card h3 { font-family: var(--font-cjk); font-weight: 900; font-size: 26px; line-height: 1.1; }
+.ed-card p  { font-size: 15px; line-height: 1.65; color: var(--brand-ink-2); }
+.ed-card .arrow { margin-top: auto; font-size: 24px; }
+
+/* —— 数据大字 —— */
+.stat .num {
+  font-family: var(--font-display); font-weight: 900; font-size: 92px;
+  line-height: .9; letter-spacing: -.02em;
+}
+.stat .num .u { font-size: 40px; }
+.stat .lab { font-size: 16px; color: var(--brand-ink-2); margin-top: 8px; line-height: 1.5; }
+
+/* 黄底数据强调块 */
+.stat-hero {
+  background: var(--brand-primary); padding: 40px 36px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+/* 通用工具 */
+.arrow-cta { font-family: var(--font-display); font-weight: 800; letter-spacing: .06em; }
+.dim { color: var(--brand-gray); }
+
+/* —— 目录行 —— */
+.toc-row {
+  display: grid; grid-template-columns: 90px 1fr auto; align-items: baseline;
+  gap: 20px; padding: 22px 4px; border-top: 1px solid var(--brand-line);
+}
+.toc-row:last-child { border-bottom: 1px solid var(--brand-line); }
+.toc-row .no { font-family: var(--font-display); font-weight: 900; font-size: 34px; }
+.toc-row .ti-title { font-family: var(--font-cjk); font-weight: 900; font-size: 30px; }
+.toc-row .ti-en { font-family: var(--font-display); font-weight: 800; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--brand-gray); }
+.toc-row.on { background: var(--brand-primary); border-color: var(--brand-ink); padding-left: 18px; padding-right: 18px; }
+
+/* —— 照片框：黄色偏移块 —— */
+.photo {
+  position: relative; background: #ddd;
+}
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.photo::before {
+  content: ''; position: absolute; left: -18px; bottom: -18px; width: 100%; height: 100%;
+  background: var(--brand-primary); z-index: -1;
+}
+.photo.ink::before { background: var(--brand-ink); }
+
+/* —— 金句 —— */
+.quote {
+  font-family: var(--font-cjk); font-weight: 900; line-height: 1.14; letter-spacing: -.01em;
+  font-size: 68px;
+}
+.quote .mk { color: var(--brand-primary); }
+
+/* —— 箭头母题 ▶▶▶ —— */
+.chev { display: inline-flex; align-items: center; gap: 10px; vertical-align: .12em; color: var(--brand-ink); }
+.chev span { width: 0; height: 0; border: 16px solid transparent; border-left: 22px solid currentColor; border-right: 0; }
+.chev.sm span { border-width: 10px; border-left-width: 14px; }
+
+/* —— 满黄 / 满墨画布 —— */
+.canvas-y { background: var(--brand-primary); }
+.canvas-ink { background: var(--brand-ink); color: var(--brand-bg); }
+
+/* —— 分镜 / 照片网格 —— */
+.sb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.sb-cell .no { font-family: var(--font-display); font-weight: 900; font-size: 15px; letter-spacing: .1em; }
+.sb-cell h4 { font-family: var(--font-cjk); font-weight: 900; font-size: 21px; margin: 8px 0 6px; line-height: 1.15; }
+.sb-cell p { font-size: 14px; line-height: 1.6; color: var(--brand-ink-2); }
+.sb-cell .shot { width: 100%; aspect-ratio: 4/3; margin-top: 16px; background: #cfcdc4; overflow: hidden; border: 2px solid var(--brand-ink); }
+.sb-cell .shot img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+
+/* —— 人物 / 嘉宾卡 —— */
+.people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.person .ph { aspect-ratio: 3/4; overflow: hidden; background: #cfcdc4; }
+.person .ph img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.person .bar { background: var(--brand-ink); color: var(--brand-bg); padding: 12px 14px; }
+.person .bar b { display: block; font-family: var(--font-cjk); font-weight: 900; font-size: 17px; }
+.person .bar span { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--brand-primary); }
+.card-stat { background: var(--brand-ink); color: var(--brand-bg); display: flex; flex-direction: column; justify-content: center; padding: 22px; }
+.card-stat .n { font-family: var(--font-display); font-weight: 900; font-size: 62px; line-height: .9; color: var(--brand-primary); }
+.card-stat .t { font-size: 14px; line-height: 1.5; margin-top: 8px; color: var(--brand-gray-2); }
+
+/* —— 巨型描边字母/字 背景母题 —— */
+/* 线形字：细字重 + 细描边，读起来是一笔一线的线稿，而不是空心粗方管 */
+.outline {
+  font-family: var(--font-display); font-weight: 300;
+  -webkit-text-stroke: 1.6px var(--brand-ink); color: transparent;
+  line-height: .8; pointer-events: none; user-select: none;
+}
+.outline.cjk { font-family: var(--font-cjk); font-weight: 300; }
+
+/* —— 时间轴 —— */
+.tl { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.tl::before { content: ''; position: absolute; left: 0; right: 0; top: 15px; height: 3px; background: var(--brand-ink); }
+.tl-node { padding-right: 24px; }
+.tl-node .dot { width: 32px; height: 32px; border-radius: 50%; background: var(--brand-primary); border: 3px solid var(--brand-ink); position: relative; z-index: 1; }
+.tl-node .yr { font-family: var(--font-display); font-weight: 900; font-size: 40px; margin: 20px 0 6px; }
+.tl-node h4 { font-family: var(--font-cjk); font-weight: 900; font-size: 20px; margin-bottom: 8px; }
+.tl-node p { font-size: 14px; line-height: 1.6; color: var(--brand-ink-2); }

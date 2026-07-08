@@ -1,0 +1,79 @@
+# 大厂编辑风 · 可换肤 Deck System
+
+一套「**皮肤（品牌 VI）与骨架（版式 + 内容）分离**」的高设计感 PPT 系统。骨架是大厂编辑风的杂志式版式（巨型标题、色块高亮、编号章节、黑白照拼贴、纯 SVG 图表、手写体点缀），皮肤是各公司品牌 VI。
+
+**HTML 是设计母本**，用无头 Chrome 渲染，一键导出 **PDF（矢量）** 与 **PPTX（每页全铺高清图，100% 保真）**。默认皮肤：美团黄黑。
+
+## ✨ 核心：换公司 = 只改一个文件
+
+换品牌只需编辑 [`slides/theme.css`](slides/theme.css)，17 页 + 图表 + 星芒 + 角标细节整体换皮：
+
+```css
+--brand-primary: #FB7299;    /* 主色（美团黄 / B站粉 / …）*/
+--brand-ink:     #18191C;    /* 墨色 */
+--brand-bg:      #FFF7FA;    /* 页底 */
+--brand-chart-3, --brand-chart-4;   /* 图表辅助色 */
+--font-display, --font-cjk, --font-script;  /* 字体 */
+--brand-logo-cn: "B站";  --brand-logo-en: "bilibili";  /* 徽标中英文 */
+```
+
+已内置示例皮肤：[`themes/meituan.css`](themes/meituan.css)（默认黄黑）、[`themes/bilibili.css`](themes/bilibili.css)（B站粉）。
+
+> **皮肤 vs 内容**：颜色 / 字体 / logo 由 `theme.css` 自动全局换皮；页面标题 / 数据 / 正文属于「内容」，随每份 deck 重写。
+
+## 17 种版式原型
+
+封面 · 目录 · 章节页（编号 / 描边两版）· 三栏卡片 · 数据网格 · 满黄数据 · 时间轴 · 分镜/流程 · 图文案例 · 团队卡 · 双人物 · 金句 · **柱状+折线图** · **环形+排名图** · 结束页。全部在 [`slides/`](slides/)，直接复制改写。
+
+## 快速开始
+
+```bash
+# 预览（本地服务器 + 放映器：←/→ 翻页，F 全屏）
+python3 -m http.server 4507
+# 浏览器打开 http://localhost:4507/index.html
+
+# 导出 PDF（矢量）
+python3 scripts/build_pdf.py            # → out/deck.pdf
+
+# 导出 PPTX（需 pip install python-pptx）
+python3 scripts/build_pptx.py           # → out/deck.pptx
+
+# 生成「双击即用」的自包含单文件 + 单页（内联 CSS，零外部依赖）
+python3 scripts/bundle_html.py          # → out/美团样册-单文件.html, standalone/*.html
+```
+
+导出脚本自动探测本机 Chrome / Chromium，无需服务器。
+
+## 换肤示例
+
+```bash
+cp themes/bilibili.css slides/theme.css        # 换成 B站粉
+python3 scripts/bundle_html.py && python3 scripts/build_pptx.py && python3 scripts/build_pdf.py
+```
+
+## 目录结构
+
+```
+├─ SKILL.md                技能入口（Claude Code skill）
+├─ index.html              放映 / 浏览器
+├─ slides/
+│  ├─ theme.css            ★ 皮肤：品牌 token / 字体 / logo（换肤只改这个）
+│  ├─ deck.css             骨架引擎：全部版式，只引用 var(--brand-*)
+│  └─ NN-*.html            17 种版式原型
+├─ themes/                 示例皮肤（meituan / bilibili）
+├─ scripts/                build_pdf.py / build_pptx.py / bundle_html.py
+└─ reference/design-spec.md  设计规范细则
+```
+
+## 设计规矩（保持一致）
+
+- 每页只保留**一个视觉焦点**，其余压成小字注释
+- 主色克制：一页里主色块 ≤ 2 处，只主色 + 墨 + 白
+- 中文标题思源黑 Heavy(900)，行高 ~1.12
+- 新页只用 `var(--brand-*)` 和 `.f-*/.s-*` 工具类，**绝不写死品牌 hex**，否则换肤会漏
+
+## 依赖
+
+- Google Chrome / Chromium（渲染导出）
+- Python 3；`python-pptx`（仅 PPTX 导出需要）
+- 字体走 Google Fonts（Archivo / Noto Sans SC / Caveat），离线自动回退系统字体

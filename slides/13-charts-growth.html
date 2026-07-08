@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<div class="slide" style="padding:40px 64px;">
+  <div class="furn-top">
+    <span class="mt-mark" style="letter-spacing:0"><i></i></span>
+    <span>增长图表 / GROWTH</span>
+  </div>
+  <hr class="rule" style="position:absolute;left:64px;right:64px;top:78px;">
+
+  <div style="position:absolute;left:64px;top:110px;display:flex;align-items:center;">
+    <h2 class="headline hl-l">关键增长<span class="hl-mark">曲线</span></h2>
+    <span class="chev sm" style="margin-left:20px;"><span></span><span></span><span></span></span>
+  </div>
+
+  <!-- 左：柱状图 交易用户 -->
+  <div style="position:absolute;left:64px;top:280px;width:560px;">
+    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:8px;">年交易用户 · 单位 亿</div>
+    <svg viewBox="0 0 560 320" width="100%">
+      <!-- gridlines -->
+      <line x1="20" y1="60"  x2="560" y2="60"  class="s-line"/>
+      <line x1="20" y1="130" x2="560" y2="130" class="s-line"/>
+      <line x1="20" y1="200" x2="560" y2="200" class="s-line"/>
+      <line x1="20" y1="270" x2="560" y2="270" class="s-ink" stroke-width="2"/>
+      <!-- bars: centers 90,200,310,420,510 -->
+      <g>
+        <rect x="60"  y="130" width="60" height="140" class="f-primary"/>
+        <rect x="170" y="102" width="60" height="168" class="f-primary"/>
+        <rect x="280" y="80"  width="60" height="190" class="f-primary"/>
+        <rect x="390" y="74"  width="60" height="196" class="f-primary"/>
+        <rect x="480" y="58"  width="60" height="212" class="f-ink"/>
+      </g>
+      <!-- value labels -->
+      <g font-family="Archivo, sans-serif" font-weight="900" font-size="26" class="f-ink" text-anchor="middle">
+        <text x="90"  y="118">5.1</text>
+        <text x="200" y="90">6.3</text>
+        <text x="310" y="68">6.8</text>
+        <text x="420" y="62">6.9</text>
+        <text x="510" y="46">7.4</text>
+      </g>
+      <!-- x labels -->
+      <g font-family="'Noto Sans SC', sans-serif" font-weight="700" font-size="15" class="f-gray" text-anchor="middle">
+        <text x="90"  y="294">2020</text>
+        <text x="200" y="294">2021</text>
+        <text x="310" y="294">2022</text>
+        <text x="420" y="294">2023</text>
+        <text x="510" y="294" class="f-ink">今年</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 右：折线图 GMV 指数 -->
+  <div style="position:absolute;left:680px;right:64px;top:280px;">
+    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:8px;">GMV 指数 · 基期 100</div>
+    <svg viewBox="0 0 520 320" width="100%">
+      <line x1="20" y1="60"  x2="520" y2="60"  class="s-line"/>
+      <line x1="20" y1="130" x2="520" y2="130" class="s-line"/>
+      <line x1="20" y1="200" x2="520" y2="200" class="s-line"/>
+      <line x1="20" y1="270" x2="520" y2="270" class="s-ink" stroke-width="2"/>
+      <!-- area + line: pts x 60,150,240,330,420,500 -->
+      <polygon points="60,222 150,198 240,158 330,118 420,84 500,58 500,270 60,270" class="f-primary" opacity="0.28"/>
+      <polyline points="60,222 150,198 240,158 330,118 420,84 500,58" fill="none" class="s-ink" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+      <g>
+        <circle cx="60"  cy="222" r="7" class="f-primary s-ink" stroke-width="3"/>
+        <circle cx="150" cy="198" r="7" class="f-primary s-ink" stroke-width="3"/>
+        <circle cx="240" cy="158" r="7" class="f-primary s-ink" stroke-width="3"/>
+        <circle cx="330" cy="118" r="7" class="f-primary s-ink" stroke-width="3"/>
+        <circle cx="420" cy="84"  r="7" class="f-primary s-ink" stroke-width="3"/>
+        <circle cx="500" cy="58"  r="11" class="f-ink"/>
+      </g>
+      <text x="500" y="40" font-family="Archivo, sans-serif" font-weight="900" font-size="28" class="f-ink" text-anchor="end">300</text>
+      <g font-family="'Noto Sans SC', sans-serif" font-weight="700" font-size="15" class="f-gray" text-anchor="middle">
+        <text x="60"  y="294">2019</text>
+        <text x="240" y="294">2021</text>
+        <text x="420" y="294">2023</text>
+        <text x="500" y="294" class="f-ink">今年</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="furn-bot"><span>数据来源 · 年报（示意）</span><span>13 / 17</span></div>
+</div>
+</body></html>
