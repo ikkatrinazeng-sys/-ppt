@@ -13,6 +13,9 @@
   --brand-bg:           #FFF7FA;   /* 极浅粉白 */
   --brand-white:        #FFFFFF;
 
+  --brand-on-primary:   #141414;
+  --brand-on-primary-2: #372228;
+
   --brand-gray:   #9499A0;
   --brand-gray-2: #C9CDD4;
   --brand-line:   #F0DCE4;
@@ -26,4 +29,6 @@
 
   --brand-logo-cn: "B站";
   --brand-logo-en: "bilibili";
+
+  --brand-logo-image: none;
 }

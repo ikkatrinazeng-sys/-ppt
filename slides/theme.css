@@ -19,9 +19,9 @@
   --brand-bg:           #FBF9F1;   /* 页底（暖白）*/
   --brand-white:        #FFFFFF;
 
-  /* —— 主色底上的文字色（深色皮肤时保持深色，保证在主色上可读）—— */
+  /* —— 主色底上的文字色（保证深浅皮肤下都可读）—— */
   --brand-on-primary:   #141414;
-  --brand-on-primary-2: #2A2A28;
+  --brand-on-primary-2: #373011;
 
   /* —— 中性灰阶（一般不改）—— */
   --brand-gray:   #8C8B84;   /* 灰注释 */
@@ -40,4 +40,7 @@
   /* —— 品牌文本 —— */
   --brand-logo-cn: "美团";      /* 徽标里的方块字 */
   --brand-logo-en: "MEITUAN";   /* 徽标英文名 */
+
+  /* —— 真实 logo 图片（可选）：设为 url(...) 可换成真实 logo，见 reskin.py --logo-image —— */
+  --brand-logo-image: none;
 }

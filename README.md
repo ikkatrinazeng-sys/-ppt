@@ -69,9 +69,30 @@ python3 scripts/reskin.py --primary "#FB7299" --logo-cn "B站" --logo-en "bilibi
 python3 scripts/reskin.py --primary "#F4CE41" --dark \
     --logo-cn "抖音" --logo-en "douyin" --rename "美团=抖音" --rename "MEITUAN=douyin"
 
+# 真实 logo 图片（而非文字方块），base64 直接内嵌进 theme.css
+python3 scripts/reskin.py --primary "#FB7299" --logo-en "bilibili" --logo-image ./logo.png
+
 # 然后刷新产物
 python3 scripts/bundle_html.py && python3 scripts/build_pptx.py && python3 scripts/build_pdf.py
 ```
+
+`reskin.py` 生成后会自动跑 **WCAG 对比度自检**，配色太糊（比如浅主色配白底）会打印警告并给出实际比值。
+
+## 拼稿子的辅助工具
+
+```bash
+# 换页顺序：先导出当前顺序清单，编辑排序后一次性重排+重编号（不用手动 mv 文件名）
+python3 scripts/assemble.py --write-current    # → slides/outline.txt
+python3 scripts/assemble.py                    # 按编辑后的顺序重排
+
+# 溢出检测：文案改长了容易被画布裁切，肉眼很难查，这个自动找出来
+python3 scripts/check_overflow.py
+
+# Contact sheet：全套 17 页缩略图拼成一张网格图，几秒看完整套
+python3 scripts/contact_sheet.py                # → out/contact-sheet.png
+```
+
+![contact sheet](docs/preview/contact-sheet.png)
 
 > 支持**浅色 / 深色**两类皮肤：`--dark` 会把墨色转浅、页底转深，主色底页的文字自动保持可读（`--brand-on-primary`）。
 
@@ -86,8 +107,11 @@ python3 scripts/bundle_html.py && python3 scripts/build_pptx.py && python3 scrip
 │  └─ NN-*.html            17 种版式原型
 ├─ themes/                 示例皮肤（meituan / bilibili / douyin 黑金）
 ├─ scripts/
-│  ├─ reskin.py            一键生成皮肤（主色 + 公司名 → theme.css）
+│  ├─ reskin.py            一键生成皮肤（主色/logo图片 + 公司名 → theme.css，含对比度自检）
+│  ├─ assemble.py          声明式排序：编辑 outline.txt 一次性重排+重编号
 │  ├─ renumber.py          按文件顺序自动刷页码
+│  ├─ check_overflow.py    溢出检测：找出超出画布的元素
+│  ├─ contact_sheet.py     全套缩略图网格（一眼看全）
 │  ├─ bundle_html.py       内联 CSS 的自包含 HTML
 │  └─ build_pdf.py / build_pptx.py
 ├─ docs/preview/           README 预览图

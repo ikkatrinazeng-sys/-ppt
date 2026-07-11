@@ -71,7 +71,11 @@ body { background: #d9d9d9; font-family: var(--font-cjk); -webkit-font-smoothing
 .rule::before { left: 0; }
 .rule::after  { right: 0; }
 
-/* —— logo 徽标（方块字 + 英文名，文字取自 theme.css）—— */
+/* —— logo 徽标（方块字 + 英文名，文字/图片取自 theme.css）——
+   默认文字徽标：i::before 显示 --brand-logo-cn。
+   若 theme.css 设置了 --brand-logo-image（url(...) 或 data URI），
+   自动切到图片徽标，文字兜底隐藏——换成真实 logo 图片时，
+   只需在 theme.css 里加一行，不用改任何 HTML。 */
 .mt-mark {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--font-cjk); font-weight: 900; letter-spacing: 0;
@@ -81,10 +85,15 @@ body { background: #d9d9d9; font-family: var(--font-cjk); -webkit-font-smoothing
 .mt-mark i {
   width: 30px; height: 30px; border-radius: 8px;
   background: var(--brand-primary);
+  background-image: var(--brand-logo-image, none);
+  background-size: 68%; background-position: center; background-repeat: no-repeat;
   display: grid; place-items: center;
   font-style: normal; font-weight: 900; font-size: 13px; color: var(--brand-ink);
   line-height: 1;
 }
+.mt-mark i::before { content: var(--brand-logo-cn); }
+/* 图片模式：reskin.py --logo-image 会把 --brand-logo-cn 设成空串，
+   ::before 自然不出文字，让上面的 background-image 干净显示 */
 .mt-mark i::before { content: var(--brand-logo-cn); }
 
 /* —— 标签：小型大写 —— */
