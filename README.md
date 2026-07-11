@@ -65,8 +65,8 @@ cp themes/bilibili.css slides/theme.css        # B站粉 / themes/douyin.css 黑
 # 方式二：一条命令生成皮肤（辅助色自动从主色推导）
 python3 scripts/reskin.py --primary "#FB7299" --logo-cn "B站" --logo-en "bilibili"
 
-# 深色皮肤（黑金）+ 顺带替换正文里的旧品牌名
-python3 scripts/reskin.py --primary "#F4CE41" --dark \
+# 深色皮肤（黑金，用哑光金属金而非亮黄，更有奢华感）+ 顺带替换正文里的旧品牌名
+python3 scripts/reskin.py --primary "#D4AF37" --dark \
     --logo-cn "抖音" --logo-en "douyin" --rename "美团=抖音" --rename "MEITUAN=douyin"
 
 # 真实 logo 图片（而非文字方块），base64 直接内嵌进 theme.css

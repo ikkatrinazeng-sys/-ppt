@@ -6,9 +6,9 @@
 
 :root {
   /* —— 主色系 —— */
-  --brand-primary:      #F4CE41;
-  --brand-primary-deep: #D7B539;
-  --brand-primary-soft: #FDF5D9;
+  --brand-primary:      #D4AF37;
+  --brand-primary-deep: #BB9A30;
+  --brand-primary-soft: #F6EFD7;
   --brand-ink:          #F5F5F5;
   --brand-ink-2:        #CBCBCC;
   --brand-bg:           #0E0E10;
@@ -16,7 +16,7 @@
 
   /* —— 主色底上的文字色 —— */
   --brand-on-primary:   #141414;
-  --brand-on-primary-2: #36301B;
+  --brand-on-primary-2: #312B19;
 
   /* —— 中性灰阶 —— */
   --brand-gray:   #9499A0;
@@ -24,7 +24,7 @@
   --brand-line:   #333335;
 
   /* —— 图表辅助色 —— */
-  --brand-chart-3: #BEA133;
+  --brand-chart-3: #A5882B;
   --brand-chart-4: #4A4B50;
 
   /* —— 字体族 —— */
@@ -35,4 +35,7 @@
   /* —— 品牌文本 —— */
   --brand-logo-cn: "抖音";
   --brand-logo-en: "douyin";
+
+  /* —— 真实 logo 图片（可选）—— */
+  --brand-logo-image: none;
 }
