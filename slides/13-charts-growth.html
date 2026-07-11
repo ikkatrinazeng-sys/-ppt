@@ -16,71 +16,76 @@
     <span class="chev sm" style="margin-left:20px;"><span></span><span></span><span></span></span>
   </div>
 
-  <!-- 左：柱状图 交易用户 -->
+  <!-- 左：柱状图 -->
   <div style="position:absolute;left:64px;top:280px;width:560px;">
-    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:8px;">年交易用户 · 单位 亿</div>
-    <svg viewBox="0 0 560 320" width="100%">
-      <!-- gridlines -->
-      <line x1="20" y1="60"  x2="560" y2="60"  class="s-line"/>
-      <line x1="20" y1="130" x2="560" y2="130" class="s-line"/>
-      <line x1="20" y1="200" x2="560" y2="200" class="s-line"/>
-      <line x1="20" y1="270" x2="560" y2="270" class="s-ink" stroke-width="2"/>
-      <!-- bars: centers 90,200,310,420,510 -->
-      <g>
-        <rect x="60"  y="130" width="60" height="140" class="f-primary"/>
-        <rect x="170" y="102" width="60" height="168" class="f-primary"/>
-        <rect x="280" y="80"  width="60" height="190" class="f-primary"/>
-        <rect x="390" y="74"  width="60" height="196" class="f-primary"/>
-        <rect x="480" y="58"  width="60" height="212" class="f-ink"/>
-      </g>
-      <!-- value labels -->
-      <g font-family="Archivo, sans-serif" font-weight="900" font-size="26" class="f-ink" text-anchor="middle">
-        <text x="90"  y="118">5.1</text>
-        <text x="200" y="90">6.3</text>
-        <text x="310" y="68">6.8</text>
-        <text x="420" y="62">6.9</text>
-        <text x="510" y="46">7.4</text>
-      </g>
-      <!-- x labels -->
-      <g font-family="'Noto Sans SC', sans-serif" font-weight="700" font-size="15" class="f-gray" text-anchor="middle">
-        <text x="90"  y="294">2020</text>
-        <text x="200" y="294">2021</text>
-        <text x="310" y="294">2022</text>
-        <text x="420" y="294">2023</text>
-        <text x="510" y="294" class="f-ink">今年</text>
-      </g>
-    </svg>
+    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:8px;" id="bar-unit"></div>
+    <svg id="barsvg" viewBox="0 0 560 320" width="100%"></svg>
   </div>
 
-  <!-- 右：折线图 GMV 指数 -->
+  <!-- 右：折线图 -->
   <div style="position:absolute;left:680px;right:64px;top:280px;">
-    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:8px;">GMV 指数 · 基期 100</div>
-    <svg viewBox="0 0 520 320" width="100%">
-      <line x1="20" y1="60"  x2="520" y2="60"  class="s-line"/>
-      <line x1="20" y1="130" x2="520" y2="130" class="s-line"/>
-      <line x1="20" y1="200" x2="520" y2="200" class="s-line"/>
-      <line x1="20" y1="270" x2="520" y2="270" class="s-ink" stroke-width="2"/>
-      <!-- area + line: pts x 60,150,240,330,420,500 -->
-      <polygon points="60,222 150,198 240,158 330,118 420,84 500,58 500,270 60,270" class="f-primary" opacity="0.28"/>
-      <polyline points="60,222 150,198 240,158 330,118 420,84 500,58" fill="none" class="s-ink" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-      <g>
-        <circle cx="60"  cy="222" r="7" class="f-primary s-ink" stroke-width="3"/>
-        <circle cx="150" cy="198" r="7" class="f-primary s-ink" stroke-width="3"/>
-        <circle cx="240" cy="158" r="7" class="f-primary s-ink" stroke-width="3"/>
-        <circle cx="330" cy="118" r="7" class="f-primary s-ink" stroke-width="3"/>
-        <circle cx="420" cy="84"  r="7" class="f-primary s-ink" stroke-width="3"/>
-        <circle cx="500" cy="58"  r="11" class="f-ink"/>
-      </g>
-      <text x="500" y="40" font-family="Archivo, sans-serif" font-weight="900" font-size="28" class="f-ink" text-anchor="end">300</text>
-      <g font-family="'Noto Sans SC', sans-serif" font-weight="700" font-size="15" class="f-gray" text-anchor="middle">
-        <text x="60"  y="294">2019</text>
-        <text x="240" y="294">2021</text>
-        <text x="420" y="294">2023</text>
-        <text x="500" y="294" class="f-ink">今年</text>
-      </g>
-    </svg>
+    <div style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--brand-ink-2);margin-bottom:8px;" id="line-unit"></div>
+    <svg id="linesvg" viewBox="0 0 520 320" width="100%"></svg>
   </div>
 
   <div class="furn-bot"><span>数据来源 · 年报（示意）</span><span>13 / 17</span></div>
 </div>
+
+<script>
+/* ====== 改这里的数字即可，坐标自动计算 ====== */
+const BAR = {
+  unit: '年交易用户 · 单位 亿',
+  data: [['2020',5.1],['2021',6.3],['2022',6.8],['2023',6.9],['今年',7.4]],
+  highlightLast: true
+};
+const LINE = {
+  unit: 'GMV 指数 · 基期 100',
+  data: [['2019',100],['',125],['2021',168],['',210],['2023',255],['今年',300]]
+};
+/* ============================================ */
+
+function barChart(svg, cfg){
+  const W=560, base=270, top=40, plotH=base-top-8, N=cfg.data.length;
+  const max=Math.max(...cfg.data.map(d=>d[1]));
+  const bw=Math.min(64, 360/N), x0=60, x1=W-30;
+  const cx=i => N===1 ? (x0+x1)/2 : x0 + i*(x1-x0)/(N-1);
+  let g='';
+  [60,130,200].forEach(y=>g+=`<line x1="20" y1="${y}" x2="${W}" y2="${y}" class="s-line"/>`);
+  g+=`<line x1="20" y1="${base}" x2="${W}" y2="${base}" class="s-ink" stroke-width="2"/>`;
+  cfg.data.forEach((d,i)=>{
+    const h=d[1]/max*plotH, y=base-h, isLast=cfg.highlightLast&&i===N-1;
+    g+=`<rect x="${cx(i)-bw/2}" y="${y}" width="${bw}" height="${h}" class="${isLast?'f-ink':'f-primary'}"/>`;
+    g+=`<text x="${cx(i)}" y="${y-12}" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="900" font-size="26" class="f-ink">${d[1]}</text>`;
+    g+=`<text x="${cx(i)}" y="${base+24}" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-weight="700" font-size="15" class="${isLast?'f-ink':'f-gray'}">${d[0]}</text>`;
+  });
+  svg.innerHTML=g;
+}
+
+function lineChart(svg, cfg){
+  const W=520, base=270, top=70, plotH=base-top, N=cfg.data.length;
+  const max=Math.max(...cfg.data.map(d=>d[1]));
+  const x0=50, x1=500, cx=i=>x0+i*(x1-x0)/(N-1), cy=v=>base-v/max*plotH;
+  let g='';
+  [60,130,200].forEach(y=>g+=`<line x1="20" y1="${y}" x2="${W}" y2="${y}" class="s-line"/>`);
+  g+=`<line x1="20" y1="${base}" x2="${W}" y2="${base}" class="s-ink" stroke-width="2"/>`;
+  const pts=cfg.data.map((d,i)=>`${cx(i)},${cy(d[1])}`).join(' ');
+  g+=`<polygon points="${pts} ${x1},${base} ${x0},${base}" class="f-primary" style="opacity:.28"/>`;
+  g+=`<polyline points="${pts}" fill="none" class="s-ink" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`;
+  cfg.data.forEach((d,i)=>{
+    const last=i===N-1;
+    g+= last
+      ? `<circle cx="${cx(i)}" cy="${cy(d[1])}" r="11" class="f-ink"/>`
+      : `<circle cx="${cx(i)}" cy="${cy(d[1])}" r="7" class="f-primary s-ink" stroke-width="3"/>`;
+    if(d[0]) g+=`<text x="${cx(i)}" y="${base+24}" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-weight="700" font-size="15" class="${last?'f-ink':'f-gray'}">${d[0]}</text>`;
+  });
+  const lastV=cfg.data[N-1][1];
+  g+=`<text x="${x1}" y="${cy(lastV)-18}" text-anchor="end" font-family="Archivo,sans-serif" font-weight="900" font-size="28" class="f-ink">${lastV}</text>`;
+  svg.innerHTML=g;
+}
+
+document.getElementById('bar-unit').textContent=BAR.unit;
+document.getElementById('line-unit').textContent=LINE.unit;
+barChart(document.getElementById('barsvg'), BAR);
+lineChart(document.getElementById('linesvg'), LINE);
+</script>
 </body></html>

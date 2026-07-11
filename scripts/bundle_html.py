@@ -28,7 +28,11 @@ def read(p):
 def main():
     css = (read(os.path.join(ROOT, "slides", "theme.css")) + "\n" +
            read(os.path.join(ROOT, "slides", "deck.css")))
-    slides = sorted(glob.glob(os.path.join(ROOT, "slides", "*.html")))
+    try:
+        import renumber; renumber.renumber(os.path.join(ROOT, "slides"))  # 自动刷页码
+    except Exception:
+        pass
+    slides = sorted(glob.glob(os.path.join(ROOT, "slides", "[0-9]*.html")))
     bodies = []
     os.makedirs(os.path.join(ROOT, "standalone"), exist_ok=True)
 

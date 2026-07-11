@@ -4,6 +4,18 @@
 
 **HTML 是设计母本**，用无头 Chrome 渲染，一键导出 **PDF（矢量）** 与 **PPTX（每页全铺高清图，100% 保真）**。默认皮肤：美团黄黑。
 
+## 同一套骨架，一键换皮
+
+| 美团黄黑（默认） | B站粉 | 抖音黑金（深色皮肤） |
+|---|---|---|
+| ![美团](docs/preview/cover-meituan.png) | ![B站](docs/preview/cover-bilibili.png) | ![抖音](docs/preview/cover-douyin-dark.png) |
+
+只改了 `theme.css` 一个文件，logo / 主色 / 页底 / 图表 / 细节整体换皮：
+
+| 图表也跟随主题 | 深色皮肤主色底页 |
+|---|---|
+| ![图表](docs/preview/chart-meituan.png) | ![深色章节](docs/preview/section-douyin-dark.png) |
+
 ## ✨ 核心：换公司 = 只改一个文件
 
 换品牌只需编辑 [`slides/theme.css`](slides/theme.css)，17 页 + 图表 + 星芒 + 角标细节整体换皮：
@@ -42,14 +54,26 @@ python3 scripts/build_pptx.py           # → out/deck.pptx
 python3 scripts/bundle_html.py          # → out/美团样册-单文件.html, standalone/*.html
 ```
 
-导出脚本自动探测本机 Chrome / Chromium，无需服务器。
+导出脚本自动探测本机 Chrome / Chromium，无需服务器，并会在导出前**自动刷新页码**（`renumber.py`），加页/删页/换序都不用手动改。
 
 ## 换肤示例
 
 ```bash
-cp themes/bilibili.css slides/theme.css        # 换成 B站粉
+# 方式一：套用现成示例皮肤
+cp themes/bilibili.css slides/theme.css        # B站粉 / themes/douyin.css 黑金
+
+# 方式二：一条命令生成皮肤（辅助色自动从主色推导）
+python3 scripts/reskin.py --primary "#FB7299" --logo-cn "B站" --logo-en "bilibili"
+
+# 深色皮肤（黑金）+ 顺带替换正文里的旧品牌名
+python3 scripts/reskin.py --primary "#F4CE41" --dark \
+    --logo-cn "抖音" --logo-en "douyin" --rename "美团=抖音" --rename "MEITUAN=douyin"
+
+# 然后刷新产物
 python3 scripts/bundle_html.py && python3 scripts/build_pptx.py && python3 scripts/build_pdf.py
 ```
+
+> 支持**浅色 / 深色**两类皮肤：`--dark` 会把墨色转浅、页底转深，主色底页的文字自动保持可读（`--brand-on-primary`）。
 
 ## 目录结构
 
@@ -60,8 +84,13 @@ python3 scripts/bundle_html.py && python3 scripts/build_pptx.py && python3 scrip
 │  ├─ theme.css            ★ 皮肤：品牌 token / 字体 / logo（换肤只改这个）
 │  ├─ deck.css             骨架引擎：全部版式，只引用 var(--brand-*)
 │  └─ NN-*.html            17 种版式原型
-├─ themes/                 示例皮肤（meituan / bilibili）
-├─ scripts/                build_pdf.py / build_pptx.py / bundle_html.py
+├─ themes/                 示例皮肤（meituan / bilibili / douyin 黑金）
+├─ scripts/
+│  ├─ reskin.py            一键生成皮肤（主色 + 公司名 → theme.css）
+│  ├─ renumber.py          按文件顺序自动刷页码
+│  ├─ bundle_html.py       内联 CSS 的自包含 HTML
+│  └─ build_pdf.py / build_pptx.py
+├─ docs/preview/           README 预览图
 └─ reference/design-spec.md  设计规范细则
 ```
 

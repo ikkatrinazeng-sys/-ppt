@@ -115,7 +115,7 @@ body { background: #d9d9d9; font-family: var(--font-cjk); -webkit-font-smoothing
 
 /* 黄色高亮块（关键词底衬） */
 .hl-mark {
-  background: var(--brand-primary);
+  background: var(--brand-primary); color: var(--brand-on-primary);
   padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
 }
 .ink-block { background: var(--brand-ink); color: var(--brand-bg); padding: 0 .1em; }
@@ -201,7 +201,16 @@ body { background: #d9d9d9; font-family: var(--font-cjk); -webkit-font-smoothing
 .chev.sm span { border-width: 10px; border-left-width: 14px; }
 
 /* —— 满黄 / 满墨画布 —— */
-.canvas-y { background: var(--brand-primary); }
+/* 主色底页：局部把「墨色」重映射成 on-primary，使文字/星芒/图标在主色上恒可读
+   （浅色皮肤下 on-primary == ink，无变化；深色皮肤下文字仍为深色）*/
+.canvas-y, .on-primary {
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+  --brand-ink: var(--brand-on-primary);
+  --brand-ink-2: var(--brand-on-primary-2);
+}
+/* 主色底页里的反白墨块：文字用白，避免深色皮肤下深块+深字 */
+.canvas-y .ink-block, .on-primary .ink-block { color: var(--brand-white); }
 .canvas-ink { background: var(--brand-ink); color: var(--brand-bg); }
 
 /* —— 分镜 / 照片网格 —— */
@@ -240,3 +249,16 @@ body { background: #d9d9d9; font-family: var(--font-cjk); -webkit-font-smoothing
 .tl-node .yr { font-family: var(--font-display); font-weight: 900; font-size: 40px; margin: 20px 0 6px; }
 .tl-node h4 { font-family: var(--font-cjk); font-weight: 900; font-size: 20px; margin-bottom: 8px; }
 .tl-node p { font-size: 14px; line-height: 1.6; color: var(--brand-ink-2); }
+
+/* —— 离线图片占位（替换 picsum；换真图时改回 <img src=...>）—— */
+.imgph {
+  width: 100%; height: 100%;
+  background:
+    repeating-linear-gradient(45deg, rgba(0,0,0,.055) 0 1px, transparent 1px 13px),
+    #D9D7CE;
+  display: grid; place-items: center;
+}
+.imgph::after {
+  content: "IMG"; font-family: var(--font-display); font-weight: 900;
+  font-size: 15px; letter-spacing: .22em; color: rgba(0,0,0,.28);
+}

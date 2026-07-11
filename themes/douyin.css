@@ -1,0 +1,38 @@
+/* ============================================================
+   品牌皮肤 · THEME  —— 由 reskin.py 生成（douyin）
+   换公司只改这一个文件；辅助色可手动微调。
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;0,900;1,800&family=Noto+Sans+SC:wght@200;300;400;500;700;900&family=Caveat:wght@700&display=swap');
+
+:root {
+  /* —— 主色系 —— */
+  --brand-primary:      #F4CE41;
+  --brand-primary-deep: #D7B539;
+  --brand-primary-soft: #FDF5D9;
+  --brand-ink:          #F5F5F5;
+  --brand-ink-2:        #CBCBCC;
+  --brand-bg:           #0E0E10;
+  --brand-white:        #FFFFFF;
+
+  /* —— 主色底上的文字色 —— */
+  --brand-on-primary:   #141414;
+  --brand-on-primary-2: #36301B;
+
+  /* —— 中性灰阶 —— */
+  --brand-gray:   #9499A0;
+  --brand-gray-2: #6B6E76;
+  --brand-line:   #333335;
+
+  /* —— 图表辅助色 —— */
+  --brand-chart-3: #BEA133;
+  --brand-chart-4: #4A4B50;
+
+  /* —— 字体族 —— */
+  --font-display: 'Archivo', 'Noto Sans SC', system-ui, sans-serif;
+  --font-cjk:     'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+  --font-script:  'Caveat', cursive;
+
+  /* —— 品牌文本 —— */
+  --brand-logo-cn: "抖音";
+  --brand-logo-en: "douyin";
+}

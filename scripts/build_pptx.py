@@ -65,7 +65,11 @@ def build(slides_dir, out_path, scale):
     except ImportError:
         sys.exit("✗ 缺少 python-pptx。请先运行:  pip install python-pptx")
 
-    htmls = sorted(glob.glob(os.path.join(slides_dir, "*.html")))
+    try:
+        import renumber; renumber.renumber(slides_dir)  # 导出前自动刷页码
+    except Exception:
+        pass
+    htmls = sorted(glob.glob(os.path.join(slides_dir, "[0-9]*.html")))
     if not htmls:
         sys.exit(f"✗ {slides_dir} 下没有 .html 幻灯片")
 

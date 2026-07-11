@@ -19,6 +19,10 @@
   --brand-bg:           #FBF9F1;   /* 页底（暖白）*/
   --brand-white:        #FFFFFF;
 
+  /* —— 主色底上的文字色（深色皮肤时保持深色，保证在主色上可读）—— */
+  --brand-on-primary:   #141414;
+  --brand-on-primary-2: #2A2A28;
+
   /* —— 中性灰阶（一般不改）—— */
   --brand-gray:   #8C8B84;   /* 灰注释 */
   --brand-gray-2: #B9B7AD;
